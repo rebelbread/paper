@@ -31,6 +31,12 @@ public class PaperController {
 
     @RequestMapping("/random")
     public Paper randomNext(Integer type) throws IOException {
+
+//        153
+//        223
+//        274
+//        113
+//        21
         Paper paper = paperMapper.findNextByRandom(type);
         return parsePaper(paper);
     }

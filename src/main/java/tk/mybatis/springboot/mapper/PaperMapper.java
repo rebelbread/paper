@@ -26,6 +26,11 @@ public interface PaperMapper extends MyMapper<Paper> {
             "  limit 0, 1 </script>")
     Paper findNextByOrder(@Param("id") Integer id, @Param("type") Integer type);
 
-    @Select(" <script> SELECT * FROM paper WHERE  id >= ((SELECT MAX(id) FROM paper)-(SELECT MIN(id) FROM paper)) * RAND() + (SELECT MIN(id) FROM paper) <if test=' type != null '> and type=#{type} </if>   LIMIT 1  </script>")
+    /**
+     * 效率低的排序  以后改
+     * @param type
+     * @return
+     */
+    @Select(" <script> SELECT * FROM paper WHERE status=1  <if test=' type != null '> and type=#{type} </if> ORDER BY RAND()  LIMIT 1  </script>")
     Paper findNextByRandom(@Param("type") Integer type);
 }
